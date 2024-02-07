@@ -2391,7 +2391,7 @@ copyUrlInit();
 function themeChooser(command) {
     let docBody = document.querySelector("body"),
         darkClass = "dark-mode",
-        darkModePref = localStorage.getItem("dark-mode-pref");
+        darkModePref = true;
     
     if ( darkModePref ) {
         if ( command === "change") {
@@ -2412,7 +2412,7 @@ if ( darkModeButton ) {
         miscTools = document.querySelector("div.miscTools");
         
     themeButton.setAttribute("id", "theme");
-    themeButton.textContent = "light mode";
+    themeButton.textContent = "dark mode";
     miscTools.append(themeButton);
     
     themeChooser();
