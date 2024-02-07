@@ -5,6 +5,31 @@
 
 :root {
     --accent-color: hsla(352, 58%, 64%, 1);
+    --accent-color-contrast: hsl(0, 0%, 55%);
+
+    --background-color: hsl(0, 0%, 83%);
+    --background-color-contrast: hsl(0, 0%, 90%);
+    --background-color-contrast-more: hsl(0, 0%, 65%);
+    --background-color-graph: hsl(0, 0%, 100%);
+    
+    --background-color-inputs: hsl(0, 0%, 100%);
+    
+    --font-color-primary: hsl(0, 0%, 10%);
+    --font-color-secondary: hsl(0, 0%, 100%);
+    --font-color-inputs: hsl(0, 0%, 50%);
+    
+    --font-primary: 'Open Sans', sans-serif;
+    --font-secondary: monospace;
+    
+    --scrollbar-color: 255,255,255;
+    --scrollbar-accent: 0,0,0;
+        
+    --logo-filter: invert(0.0);
+    --svg-filter: none;
+}
+
+body.dark-mode {
+    --accent-color: hsla(352, 58%, 64%, 1);
     --accent-color-contrast: hsla(0, 0%, 80%, 0.733);
 
     --background-color: rgb(29, 29, 29);
@@ -28,30 +53,6 @@
     --svg-filter: invert(0.0);
 }
 
-body.dark-mode {
-    --accent-color: hsla(352, 58%, 64%, 1);
-    --accent-color-contrast: hsl(0, 0%, 55%);
-
-    --background-color: hsl(0, 0%, 83%);
-    --background-color-contrast: hsl(0, 0%, 90%);
-    --background-color-contrast-more: hsl(0, 0%, 65%);
-    --background-color-graph: hsl(0, 0%, 100%);
-    
-    --background-color-inputs: hsl(0, 0%, 100%);
-    
-    --font-color-primary: hsl(0, 0%, 10%);
-    --font-color-secondary: hsl(0, 0%, 100%);
-    --font-color-inputs: hsl(0, 0%, 50%);
-    
-    --font-primary: 'Open Sans', sans-serif;
-    --font-secondary: monospace;
-    
-    --scrollbar-color: 255,255,255;
-    --scrollbar-accent: 0,0,0;
-        
-    --logo-filter: invert(0.0);
-    --svg-filter: none;
-}
 
 text.site_name {
     color: var(--font-color-primary);
