@@ -88,13 +88,13 @@ doc.html(`
 
       <div class="manage">
         <div class="customDF">
-          <span>Custom Delta Tilt:</span>
+          <span>Preference Adjustments:</span>
           <div>
             <input type="number" inputmode="decimal" id="cusdf-tilt" value="`+ default_tilt +`" step="0.1""></input>
             <span>Tilt (dB/Oct)</span>
           </div>
           <div>
-            <input type="number" inputmode="decimal" id="cusdf-bass" value="`+ default_bass_shelf +`" step="1""></input>
+            <input type="number" inputmode="decimal" id="cusdf-bass" value="`+ default_bass_shelf +`" step="0.1""></input>
             <span>Bass (dB)</span>
           </div>
           <div>
@@ -105,9 +105,9 @@ doc.html(`
             <input type="number" inputmode="decimal" id="cusdf-ear" value="`+ default_ear +`" step="0.1""></input>
             <span>Ear Gain (dB)</span>
           </div>
-          <button id="cusdf-10db" style="margin-right: 10px">10dB Tilt</button>
           <button id="cusdf-tiltTHIS" style="margin-right: 10px">Tilt Current Target</button>
-          <button id="cusdf-bounds">Preference Bounds</button>
+          <button id="cusdf-harmanfilters" style="margin-right: 10px">Harman Filters</button>
+          <button id="cusdf-bounds" class="harman2018">Preference Bounds</button>
         </div>
         <table class="manageTable">
           <colgroup>
@@ -298,6 +298,10 @@ gr.append("rect").attrs({x:0, y:pad.t-8, width:W0, height:H0-22, rx:4,
                          "class":"graphBackground"});
 watermark(gr);
 
+// rotate id=logo 360 degrees every second using keyframes
+let keyframes = "@keyframes rotate { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }";
+let style = doc.select("head").append("style").html(keyframes);
+gr.select("#logo").style("animation", "rotate 10s linear infinite");
 // Hidden features activation by Konami code
 let konami = false;
 let konami_code = [38,38,40,40,37,39,37,39,66,65]; // up up down down left right left right b a
@@ -380,7 +384,7 @@ let xAxis = d3.axisBottom(x)
     .tickValues(d3.merge([1,2,3].map(e=>xvals.map(m=>m*Math.pow(10,e)))).concat([250,20000]))
     .tickFormat(f => f>=1000 ? (f/1000)+"k" : f);
 
-let tickPattern = [3,0,0,0,3,0,0,0,0,0,0,3,0,0,0,0,3,0,3,0,3,0,0,0,3],
+let tickPattern = [3,0,0,1,0,0,1,0,3,0,0,1,0,0,1,0,3,0,0,1,0,0,1,0,0,3],
     getTickType = i => i =  tickPattern[i],
     tickThickness = [2,4,4,9,15].map(t=>t/10);
 
@@ -398,7 +402,7 @@ function fmtX(xa) {
     xa.selectAll(".tick text").filter((_,i) => tickPattern[i] != 0)
       //.attr("font-size","92%")
       .attr("font-weight","lighter")
-      //.attr("opacity", "0.9");
+      //.attr("opacity", ".9");
     xa.select(".tick:last-of-type text")
       .attr("dx",-5)
       .text("20kHz");
@@ -596,7 +600,7 @@ doc.select("#yscalebtn").on("click", function() {
 
 
 // Label drawing and screenshot
-let getFullName = p => p.dispBrand+" "+p.dispName,
+let getFullName = p => (p.dispBrand+" "+p.dispName).replace(/^Uploaded /, ""),
     getChannelName = p => n => getFullName(p) + " ("+n+")";
 
 let labelButton = doc.select("#label"),
@@ -749,12 +753,8 @@ function saveGraph(ext) {
     gpath.selectAll("path").classed("highlight",false);
     drawLabels();
     showControls(false);
-    gr.select("[id=background]").attrs({"display":"none"}); 
     fn(gr.node(), "graph."+ext, {scale:3})
-        .then(()=>{
-            showControls(true)
-            gr.select("[id=background]").attrs({"display":null});
-        });
+        .then(()=>showControls(true));
     
     // Analytics event
     if (analyticsEnabled) { pushEventTag("clicked_download", targetWindow); }
@@ -1012,7 +1012,7 @@ let baseline0 = { p:null, l:null, fn:l=>l },
 
 let gpath = gr.insert("g",".dBScaler")
     .attr("fill","none")
-    .attr("stroke-width",2.3)
+    .attr("stroke-width",1.7)
     .attr("mask","url(#graphFade)");
 function hl(p, h) {
     gpath.selectAll("path").filter(c=>c.p===p).classed("highlight",h);
@@ -1032,7 +1032,7 @@ function getCurveColor(id, o) {
     let s = Math.sin(2*Math.PI*i);
     return d3.hcl(360*((i + t/p2)%1) + (o * 30), // hue varies with "o"
                   88+30*(j%1 + 1.3*s - t/p3),
-                  55); //constant luminance
+                  64); //constant luminance
 }
 let getColor_AC = c => getCurveColor(c.p.id, c.o);
 let getColor_ph = (p,i) => getCurveColor(p.id, p.activeCurves[i].o);
@@ -1233,7 +1233,7 @@ function addPhonesToUrl() {
         url += "?share=" + encodeURI(names.join().replace(/ /g,"_"));
         title = namesCombined + " - " + title;
     }
-    if (names.includes("Custom Tilt")) {
+    if (names.includes("Custom Diffuse Field Tilt")) {
         url += "&bass="+boost+"&tilt="+tilt+"&treble="+treble+"&ear="+ear;
     }
     if (names.length === 1) {
@@ -1812,19 +1812,19 @@ d3.json(typeof PHONE_BOOK !== "undefined" ? PHONE_BOOK
         if (url.includes(cDFb)) {
             boost = parseFloat(cTiltParams[1]);
         }
-        
+
         if (url.includes(cDFt)) {
             tilt = parseFloat(cTiltParams[2]);
         }
-        
+
         if (url.includes(cDFtr)) {
             treble = parseFloat(cTiltParams[3]);
         }
-        
+
         if (url.includes(cDFe)) {
             ear = parseFloat(cTiltParams[4]);
         }
-        
+
 
     }
     let isInit = initReq ? f => initReq.indexOf(f) !== -1
@@ -1919,16 +1919,13 @@ d3.json(typeof PHONE_BOOK !== "undefined" ? PHONE_BOOK
         removePhone(df);
         if (isInit("Custom Tilt") || init_phones.includes(default_DF_name + " Target")) {
             updateDF(boost, tilt, ear, treble);
-            doc.select("#cusdf-bass").node().value = boost;
-            doc.select("#cusdf-tilt").node().value = tilt;
-            doc.select("#cusdf-ear").node().value = ear;
-            doc.select("#cusdf-treb").node().value = treble;
+            updateDispVals();
         }
     });
-
+    
     inits.map(p => p.copyOf ? showVariant(p.copyOf, p, initMode)
-                            : showPhone(p,0,1, initMode));
-
+    : showPhone(p,0,1, initMode));
+    
     // -------------------- Custom DF Tilt -------------------- //
     let customTiltName = default_DF_name;
     let tiltTHIS = doc.select("#cusdf-tiltTHIS");
@@ -1945,7 +1942,6 @@ d3.json(typeof PHONE_BOOK !== "undefined" ? PHONE_BOOK
                 // if target exists, switch df to first target
                 df = activeTarget;
                 customTiltName = activeTarget.dispName;
-                if (activeTarget.dispName == "∆") customTiltName = "Delta (∆)";
                 if (!df.rawChannels) {
                     loadFiles(df, function (ch) {
                         df.rawChannels = ch;
@@ -1988,16 +1984,25 @@ d3.json(typeof PHONE_BOOK !== "undefined" ? PHONE_BOOK
         boost != 0 && (treble != 0 || ear != 0) ? fullDispName += ", " : null;
         treble != 0 ? fullDispName += "Treble: " + treble + "dB" : null;
         treble != 0 && ear != 0 ? fullDispName += ", " : null;
-        ear != 0 ? fullDispName += "Ear: " + ear + "dB" : null;
+        ear != 0 ? fullDispName += "3kHz: " + ear + "dB" : null;
         tilt != 0 || boost != 0 || treble != 0 || ear != 0 ? fullDispName += ")" : null;
-        let phoneObj = { isTarget:true, brand:brand, phone:"Custom Tilt",
-        fullName:fullDispName,
-        dispName:"Custom " + customTiltName + " Tilt",
-            fileName:"Custom Tilt"};
-        phoneObj.rawChannels = [tiltOct];
+
+        if (tilt == 0 && boost == 4.8 && treble == -4.4 && ear == 0) {
+            fullDispName += " (Harman 2013 Filters)"
+        } else if (tilt == 0 && boost == 6.6 && treble == -2.4 && ear == 0) {
+            fullDispName += " (Harman 2015 Filters)"
+        } else if (tilt == 0 && boost == 6.6 && treble == -2.4 && ear == -2) {
+            fullDispName += " (Harman 2018 Filters)"
+        }
+
+        let phoneObj = { isTarget:true, brand:brand, phone:"Custom Diffuse Field Tilt",
+            fullName:fullDispName,
+            dispName:customTiltName + " + Preference Adjustments",
+            fileName:"Custom Diffuse Field Tilt"};
+            phoneObj.rawChannels = [tiltOct];
         phoneObj.id = -69;
         
-        let oldPhoneObj = brand.phoneObjs.filter(p => p.phone == "Custom Tilt")[0]
+        let oldPhoneObj = brand.phoneObjs.filter(p => p.phone == "Custom Diffuse Field Tilt")[0]
         if (oldPhoneObj) {
             // removePhone(oldPhoneObj);
             phoneObj.id = oldPhoneObj.id;
@@ -2024,11 +2029,28 @@ d3.json(typeof PHONE_BOOK !== "undefined" ? PHONE_BOOK
         }
     }
 
+    function updateDispVals() {
+        doc.select("#cusdf-bass").node().value = boost;
+        doc.select("#cusdf-tilt").node().value = tilt;
+        doc.select("#cusdf-ear").node().value = ear;
+        doc.select("#cusdf-treb").node().value = treble;
+    }
+
     doc.select("#cusdf-bass").on("change input", function () {
         if (!this.value.match(/^-?\d*(\.\d+)?$/)) return;
         boost = +this.value;
-        if (konami) {
-            // hidden features
+        if (konami) { // hidden features :^) - Haruto
+            if (boost > 12) { // if boost was above 12, change graph watermark to tam
+                gr.select("[id=logo]")
+                    .attrs({"xlink:href":watermark_tam_url}); 
+                gr.select("[id=wtext]")
+                    .text("Hi Tam");
+            } else {
+                gr.select("[id=logo]")
+                    .attrs({"xlink:href":watermark_image_url}); 
+                gr.select("[id=wtext]")
+                    .text(watermark_text);
+            }
         }
         updateDF(boost, tilt, ear, treble, "bass");
     });
@@ -2050,17 +2072,44 @@ d3.json(typeof PHONE_BOOK !== "undefined" ? PHONE_BOOK
         treble = +this.value;
         updateDF(boost, tilt, ear, treble, "treble");
     });
-
-    // Standard 10dB delta used by Crinacle and Headphones.com button
-    doc.select("#cusdf-10db").on("click", function () {
-        // zero bass boost
-        boost = 0;
-        // tilt -1dB/oct
-        tilt = -1;
+                            
+    // Harman Filters button
+    doc.select("#cusdf-harmanfilters").on("click", function () {
+        switch (this.classList[0]) {
+            case "harman2013":
+                this.classList.remove("harman2013");
+                this.classList.add("harman2015");
+                tilt = 0;
+                boost = 6.6;
+                treble = -2.4;
+                ear = 0;
+                break;
+            case "harman2015":
+                this.classList.remove("harman2015");
+                this.classList.add("harman2018");
+                tilt = 0;
+                boost = 6.6;
+                treble = -2.4;
+                ear = -2;
+                break;
+            case "harman2018":
+                this.classList.remove("harman2018");
+                this.classList.add("harman2013");
+                tilt = 0;
+                boost = 4.8;
+                treble = -4.4;
+                ear = 0;
+                break;
+            default:
+                this.className = "harman2018"
+                tilt = 0;
+                boost = 6.6;
+                treble = -2.4;
+                ear = -2;
+                break;
+        }
         updateDF(boost, tilt, ear, treble);
-        // update cusdf inputs
-        doc.select("#cusdf-bass").node().value = boost;
-        doc.select("#cusdf-tilt").node().value = tilt;
+        updateDispVals();
     });
 
     // Preference Bounds button
@@ -2093,7 +2142,7 @@ d3.json(typeof PHONE_BOOK !== "undefined" ? PHONE_BOOK
         }
 
     });
-
+                        
     function setBrand(b, exclusive) {
         let phoneSel = doc.select("#phones").selectAll("div.phone-item");
         let incl = currentBrands.indexOf(b) !== -1;
@@ -2363,7 +2412,7 @@ if ( darkModeButton ) {
         miscTools = document.querySelector("div.miscTools");
         
     themeButton.setAttribute("id", "theme");
-    themeButton.textContent = "dark mode";
+    themeButton.textContent = "light mode";
     miscTools.append(themeButton);
     
     themeChooser();
@@ -2657,7 +2706,7 @@ function addExtra() {
                 let fullName = name + (name.match(/ Target$/i) ? "" : " Target");
                 let existsTargets = targets.reduce((a, b) => a.concat(b.files), []).map(f => f += " Target");
                 if (existsTargets.indexOf(fullName) >= 0) {
-                    alert("This target already exists on this tool, please select it instead of uploading.");
+                    alert("This target already exists on this tool, please select it instead of upload.");
                     return;
                 }
                 let phoneObj = {
@@ -2801,6 +2850,7 @@ function addExtra() {
         clearTimeout(applyEQHandle);
         applyEQHandle = setTimeout(applyEQExec, 100);
         updateFilters(elemToFilters());
+        document.dispatchEvent(new CustomEvent('UpdateExtensionFilters', { detail: { filters: elemToFilters() } }));
     };
     window.updateEQPhoneSelect = () => {
         let oldValue = eqPhoneSelect.value;
@@ -2931,7 +2981,7 @@ function addExtra() {
             p => p.fullName == phoneSelected && p.eq)[0];
         let filters = elemToFilters(true);
         if (!phoneObj || !filters.length) {
-            alert("Please select model and add at least one filter before exporting.");
+            alert("Please select model and add atleast one filter before export.");
             return;
         }
         let preamp = Equalizer.calc_preamp(
@@ -2962,7 +3012,7 @@ function addExtra() {
             p => p.fullName == phoneSelected && p.eq)[0] || { fullName: "Unnamed" };
         let filters = elemToFilters();
         if (!filters.length) {
-            alert("Please add at least one filter before exporting.");
+            alert("Please add atleast one filter before export.");
             return;
         }
         let graphicEQ = Equalizer.as_graphic_eq(filters);
@@ -3009,7 +3059,7 @@ function addExtra() {
         let targetObj = (activePhones.filter(p => p.isTarget)[0] ||
             activePhones.filter(p => p !== phoneObj && !p.isTarget)[0]);
         if (!phoneObj || !targetObj) {
-            alert("Please select model and target, if there are no targets and multiple models are displayed then the second one will be selected as target.");
+            alert("Please select model and target, if there are no target and multiple models are displayed then the second one will be selected as target.");
             return;
         }
         let autoEQOverlay = document.querySelector(".extra-eq-overlay");
@@ -3169,7 +3219,7 @@ function addExtra() {
 
     function applyFilters(audioContext, inputNode, filters) {
         const nodes = [inputNode];
-    
+
         nodes[nodes.length - 1].disconnect();
 
         if (inputNode == pinkNoiseSource || inputNode == toneGeneratorOsc) {
@@ -3183,7 +3233,7 @@ function addExtra() {
             nodes[nodes.length - 1].connect(merger, 0, 1); // Connect to the right channel
             nodes.push(merger);
         }
-
+        
         filters.forEach(filterInfo => {
             const filter = audioContext.createBiquadFilter();
             let type;
@@ -3205,7 +3255,7 @@ function addExtra() {
         
         nodes[nodes.length - 1].connect(channelSplitter);
     }
-    
+
     // load pink noise audio file
     document.addEventListener("DOMContentLoaded", () => {
         pinkNoiseAudio = document.getElementById("pinkNoiseAudio");
@@ -3217,7 +3267,7 @@ function addExtra() {
 
         // apply filters
         applyFilters(audioContext, currentSource, elemToFilters());
-        
+
         // track swapping
         let pinkNoisePlayButton = document.getElementById("play-button");
         let eqDemo = document.querySelector("div.eq-demo");
@@ -3345,33 +3395,36 @@ function addExtra() {
             }
         });
     });
-
+    
     // get average of all active headphones except targets
     function getAvgAll() {
         let v = activePhones.filter(p => !p.isTarget).map(p => getAvg(p));
         return avgCurves(v);
     }
     // draw average of all active headphones
-    let avgAllBtn = document.querySelector("button#avg-all");
+    function drawAvgAll() {
+        let avgAllBtn = document.querySelector("button#avg-all");
 
-    avgAllBtn.addEventListener("click", function() {
-        let avgAll = getAvgAll();
-        let p = { name: "Average of All SPLs"};
-        let ch = [avgAll];
-        let phone = addOrUpdatePhone(brandMap.Uploaded, p, ch);
-        // if avg-all button not classed with selected class
-        if (!avgAllBtn.classList.contains("selected")) {
-            showPhone(phone, false);
-            // add selected class to avg-all button
-            avgAllBtn.classList.add("selected");
-        } else {
-            // remove selected class from avg-all button
-            avgAllBtn.classList.remove("selected");
-            // remove avg-all phone
-            removePhone(phone);
-        }
-        updatePaths(true);
-    });
+        avgAllBtn.addEventListener("click", function() {
+            let avgAll = getAvgAll();
+            let p = { name: "Average of All SPLs"};
+            let ch = [avgAll];
+            let phone = addOrUpdatePhone(brandMap.Uploaded, p, ch);
+            // if avg-all button not classed with selected class
+            if (!avgAllBtn.classList.contains("selected")) {
+                showPhone(phone, false);
+                // add selected class to avg-all button
+                avgAllBtn.classList.add("selected");
+            } else {
+                // remove selected class from avg-all button
+                avgAllBtn.classList.remove("selected");
+                // remove avg-all phone
+                removePhone(phone);
+            }
+            updatePaths(true);
+        });
+    }
+    drawAvgAll();
 }
 addExtra();
 
@@ -3404,7 +3457,7 @@ function addHeader() {
     headerLogoSpan.setAttribute('style', "position:absolute; color: #ffffff;");
     headerLogoLink.append(headerLogoSpan);
     headerLogoImg.setAttribute("src", headerLogoImgUrl);
-    headerLogoImg.setAttribute('style', "width:95%; margin-left: 33%; fill: #ffffff;");
+    headerLogoImg.setAttribute('style', "width:95%; margin-left: 3%; fill: #ffffff;");
     headerLogoLink.append(headerLogoImg);
     
     altHeaderElem.append(headerButton);

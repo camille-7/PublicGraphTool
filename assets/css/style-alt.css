@@ -147,6 +147,10 @@ g.dBScaler rect[fill="#bbb"] {
     fill: var(--background-color-graph);
 }
 
+svg#fr-graph > g > image {
+    filter: var(--svg-filter);
+}
+
 svg#fr-graph rect {
     pointer-events: all;
 }
@@ -325,9 +329,8 @@ header.header {
     align-items: center;
     
     box-sizing: border-box;
-    flex: 48px 0 0;
     
-    background-color: #000000;
+    background-color: var(--header-color);
 }
 
 button.header-button {
@@ -340,7 +343,7 @@ div.logo {
     align-items: center;
     
     box-sizing: border-box;
-    flex: 200px 0 0;
+    flex: 350px 0 0;
     height: 48px;
     padding: 12px 0;
     overflow: hidden;
@@ -378,6 +381,7 @@ ul.header-links {
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+    direction: rtl !important;
     
     box-sizing: border-box;
     flex: 100% 0 1;
@@ -401,13 +405,10 @@ ul.header-links li {
     height: 42px;
     padding: 6px 0 0 0;
     margin: 0;
+    margin-left: 32px;
     
     list-style: none;
     white-space: nowrap;
-}
-
-ul.header-links li + li {
-    margin-left: 32px;
 }
 
 ul.header-links a {
@@ -465,6 +466,122 @@ div.graph-sizer {
 
 /*****
 Tools styles *****/
+
+div.customDF {
+    display: flex;
+    align-items: flex-start;
+    box-sizing: border-box;
+    padding: 16px;
+    padding-left: 5px;
+    max-height: 68px;
+    overflow-x: auto;
+    overflow-y: hidden
+}
+
+div.customDF>span {
+    margin-right: 10px;
+    padding-left: 10px;
+    padding-top: 12px;
+    color: var(--background-color-contrast-more);
+    font-family: var(--font-secondary);
+    font-size: 11px;
+    line-height: 1em;
+    text-transform: uppercase;
+    white-space: nowrap
+}
+
+div.customDF .helptip {
+    display: none
+}
+
+div.customDF>div {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0 10px 0 0;
+}
+
+div.customDF>button+div {
+    margin-left: 6px
+}
+
+div.customDF>div>input {
+    order: 2;
+    box-sizing: border-box;
+    width: 70px;
+    height: 36px;
+    padding: 10px 0;
+    background-color: var(--background-color-inputs);
+    border: 1px solid var(--background-color-contrast-more);
+    border-right: none;
+    border-left: none;
+    border-radius: 0;
+    outline: none;
+    color: var(--font-color-inputs);
+    font-family: var(--font-secondary);
+    font-size: 11px;
+    line-height: 1em;
+    text-transform: uppercase;
+    text-align: left;
+    padding-left: 11px
+}
+
+div.customDF>div:after {
+    order: 3;
+    content: '';
+    box-sizing: border-box;
+    display: block;
+    width: 6px;
+    height: 36px;
+    background-color: var(--background-color-inputs);
+    border: 1px solid var(--background-color-contrast-more);
+    border-left: none;
+    border-radius: 0 6px 6px 0
+}
+
+div.customDF>div>span {
+    order: 1;
+    padding: 11px 16px;
+    background-color: var(--background-color)!important;
+    border: 1px solid var(--background-color-contrast-more);
+    border-right: none;
+    border-radius: 6px 0 0 6px;
+    color: var(--accent-color-contrast);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1em;
+    white-space: nowrap
+}
+
+div.customDF>div.selected>span {
+    background-color: var(--accent-color)!important;
+    border-color: var(--accent-color);
+    color: var(--font-color-secondary)
+}
+
+div.customDF>button {
+    padding: 11px 16px;
+    
+    background-color: var(--background-color) !important;
+    border: 1px solid var(--background-color-contrast-more);
+    border-radius: 6px;
+    
+    color: var(--accent-color-contrast);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 1em;
+    
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+div.customDF>button:active {
+    box-sizing: border-box;
+    background-color: var(--accent-color) !important;
+    border-color: var(--accent-color) !important;
+    
+    color: var(--font-color-secondary);
+}
 
 div.tools {
     order: 1;
@@ -947,7 +1064,8 @@ div.miscTools button#theme:active {
     color: var(--font-color-secondary);
 }
 
-/***** Targets styles *****/
+/*****
+Targets styles *****/
 
 div.targets {
     display: flex;
@@ -1886,6 +2004,8 @@ div.scroll {
     
     overflow-y: auto;
     overflow-x: hidden;
+    
+    scroll-behavior: smooth;
 }
 
 /* List selected styles */
@@ -3005,29 +3125,10 @@ Responsive styles *****/
     /*****
     Alt header mobile *****/
 
-    header.header:before {
-        position: absolute;
-        top: 6px;
-        left: 6px;
-
-        content: '';
-        box-sizing: border-box;
-        display: block;
-        width: 36px;
-        height: 36px;
-
-        background-color: var(--background-color);
-        border: 1px solid var(--background-color-contrast-more);
-        border-radius: 6px;
-        cursor: pointer;
-        display: none;
-    }
-
     button.header-button {
-        content: '';
         box-sizing: border-box;
         display: block;
-        width: 36px;
+        flex: 36px 0 0;
         height: 36px;
         margin: 0 0 0 6px;
 

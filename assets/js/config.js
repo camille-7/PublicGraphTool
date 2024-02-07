@@ -1,8 +1,8 @@
 // Configuration options
-const init_phones = [],// Optional. Which graphs to display on initial load. Note: Share URLs will override this set
+const init_phones = ["JM-1 Target"],// Optional. Which graphs to display on initial load. Note: Share URLs will override this set
       DIR = "data/",                                // Directory where graph files are stored
       default_channels = ["L","R"],                 // Which channels to display. Avoid javascript errors if loading just one channel per phone
-      default_normalization = "dB",                 // Sets default graph normalization mode. Accepts "dB" or "Hz"
+      default_normalization = "Hz",                 // Sets default graph normalization mode. Accepts "dB" or "Hz"
       default_norm_db = 60,                         // Sets default dB normalization point
       default_norm_hz = 630,                        // Sets default Hz normalization point (500Hz is recommended by IEC)
       max_channel_imbalance = 5,                    // Channel imbalance threshold to show ! in the channel selector
@@ -13,12 +13,12 @@ const init_phones = [],// Optional. Which graphs to display on initial load. Not
       alt_tutorial = true,                          // Display a configurable frequency response guide below the graph
       site_url = '/',                               // URL of your graph "homepage"
       share_url = true,                             // If true, enables shareable URLs
-      watermark_text = "HarutoHiroki",              // Optional. Watermark appears behind graphs
-      watermark_image_url = "assets/images/haruto.svg", // Optional. If image file is in same directory as config, can be just the filename
-      page_title = "HarutoHiroki",                  // Optional. Appended to the page title if share URLs are enabled
-      page_description = "View and compare frequency response graphs for earphones",
+      watermark_text = "IEC711 Clone",              // Optional. Watermark appears behind graphs
+      watermark_image_url = "assets/images/copland.svg", // Optional. If image file is in same directory as config, can be just the filename
+      page_title = "Camille's Audio Database",                  // Optional. Appended to the page title if share URLs are enabled
+      page_description = "View in-ear monitor & headphone measurements",
       accessories = true,                           // If true, displays specified HTML at the bottom of the page. Configure further below
-      externalLinksBar = true,                      // If true, displays row of pill-shaped links at the bottom of the page. Configure further below
+      externalLinksBar = false,                      // If true, displays row of pill-shaped links at the bottom of the page. Configure further below
       expandable = false,                           // Enables button to expand iframe over the top of the parent page
       expandableOnly = false,                       // Prevents iframe interactions unless the user has expanded it. Accepts "true" or "false" OR a pixel value; if pixel value, that is used as the maximum width at which expandableOnly is used
       headerHeight = '0px',                         // Optional. If expandable=true, determines how much space to leave for the parent page header
@@ -36,23 +36,21 @@ const init_phones = [],// Optional. Which graphs to display on initial load. Not
 
 // Specify which targets to display
 const targets = [
-    { type:"Reference", files:["Haruto", "Haruto 🅱️ass"] },
-    { type:"Neutral",    files:["Diffuse Field","Etymotic","Free Field","IEF Neutral"] },
-    { type:"Reviewer",   files:["Antdroid","Banbeucmas","HBB","Precogvision","Super Review 22","Super Review 21","Timmy","VSG"] },
-    { type:"IEF Members", files:["Brownie", "Brownie Unsmoothened", "Listener (No Bass Shelf)", "Rennsport"]},
-    { type:"Preference", files:["Harman IE 2019v2","Harman IE 2017v2","AutoEQ","Rtings","Sonarworks"] }
+    { type:"Reference", files:["∆", "JM-1"] },
+    { type:"Community",    files:["In-Ear Fidelity (Compensated)"] },
+    { type:"Preference", files:["Harman In-Ear (2019)","Harman In-Ear (2017)"] }
 ];
 
 // Haruto's Addons
 const  preference_bounds = "assets/images/bounds.png", // Preference bounds image
-       PHONE_BOOK = "phone_book.json",              // Path to phone book JSON file
-       default_DF_name = "Diffuse Field",           // Default RAW DF name
-       dfBaseline = true,                           // If true, DF is used as baseline when custom df tilt is on
-       default_bass_shelf = 8,                      // Default Custom DF bass shelf value
-       default_tilt = -0.8,                         // Default Custom DF tilt value
-       default_ear = 0,                             // Default Custom DF ear gain value
-       default_treble = 0,                          // Default Custom DF treble gain value
-       tiltableTargets = ["Diffuse Field"];         // Targets that are allowed to be tilted
+       PHONE_BOOK = "phone_book.json",                 // Path to phone book JSON file
+       default_DF_name = "JM-1",                       // Default RAW DF name
+       dfBaseline = true,                              // If true, DF is used as baseline when custom df tilt is on
+       default_bass_shelf = 0,                         // Default Custom DF bass shelf value
+       default_tilt = -1,                            // Default Custom DF tilt value
+       default_ear = 0,                                // Default Custom DF ear gain value
+       default_treble = 0,                             // Default Custom DF treble gain value
+       tiltableTargets = ["∆","JM-1"];  
 
 
 // *************************************************************
@@ -65,30 +63,41 @@ const  preference_bounds = "assets/images/bounds.png", // Preference bounds imag
 function watermark(svg) {
     let wm = svg.append("g")
         .attr("transform", "translate("+(pad.l+W/2)+","+(pad.t+H/2-20)+")")
-        .attr("opacity",0.2);
+        .attr("opacity",.25);
     
-    if ( watermark_image_url ) {
+     if ( watermark_image_url ) {
         wm.append("image")
-            .attrs({id:'logo', x:-64, y:-64, width:128, height:128, "xlink:href":watermark_image_url, "class":"graph_logo"});
+            .attrs({id:'logo', x:318, y:-136, width:60, height:60, "xlink:href":watermark_image_url});
     }
     
     if ( watermark_text ) {
         wm.append("text")
-            .attrs({id:'wtext', x:0, y:80, "font-size":28, "text-anchor":"middle", "class":"graph-name"})
-            .text(watermark_text);
+            .attrs({x:3, y:160, "font-size":14, "text-anchor":"middle", "class":"graph-name"})
+            .text(watermark_text)
+            .attr("opacity",.48);
     }
 
     if ( preference_bounds ) {
         wm.append("image")
         .attrs({id:'bounds',x:-385, y:-365, width:770, height:770, "xlink:href":preference_bounds, "display":"none"});
     }
+    
+    let wmSq = svg.append("g")
+        .attr("opacity",0.2);
+    
+    wmSq.append("image")
+        .attrs({x:652, y:254, width:100, height:94, "class":"", "xlink:href":""});
+    
+    wmSq.append("text")
+        .attrs({x:763, y:319, "font-size":10, "transform":"translate(0,0)", "text-anchor":"end", "class":"wm-squiglink-address"})
+        .text("");
 
     // Extra flair
     svg.append("g")
         .attr("opacity",0.2)
         .append("text")
         .attrs({x:765, y:314, "font-size":10, "text-anchor":"end", "class":"site_name"})
-        .text("graphtool.harutohiroki.com");
+        .text("graphtool.layer7.me");
 }
 
 
@@ -137,60 +146,6 @@ const
     // Which of the above variables to actually insert into the page
     whichAccessoriesToUse = simpleAbout;
 
-
-
-// Configure external links to appear at the bottom of the page. Displayed only if externalLinksBar (above) is true
-const linkSets = [
-    {
-        label: "IEM graph databases",
-        links: [
-            {
-                name: "Audio Discourse",
-                url: "https://iems.audiodiscourse.com/"
-            },
-            {
-                name: "In-Ear Fidelity",
-                url: "https://crinacle.com/graphs/iems/graphtool/"
-            },
-            {
-                name: "Precogvision",
-                url: "https://precog.squig.link/"
-            },
-            {
-                name: "Super* Review",
-                url: "https://squig.link/"
-            },
-            {
-                name: "Timmy",
-                url: "https://timmyv.squig.link/"
-            },
-        ]
-    },
-    {
-        label: "Headphones",
-        links: [
-            {
-                name: "Audio Discourse",
-                url: "https://headphones.audiodiscourse.com/"
-            },
-            {
-                name: "In-Ear Fidelity",
-                url: "https://crinacle.com/graphs/headphones/graphtool/"
-            },
-            {
-                name: "Listener",
-                url: "https://listener800.github.io/"
-            },
-            {
-                name: "Super* Review",
-                url: "https://squig.link/hp.html"
-            }
-        ]
-    }
-];
-
-
-
 // Set up analytics
 function setupGraphAnalytics() {
     if ( analyticsEnabled ) {
@@ -207,69 +162,22 @@ setupGraphAnalytics();
 
 
 // If alt_header is enabled, these are the items added to the header
-let headerLogoText = "HarutoHiroki",
-    headerLogoImgUrl = "assets/images/haruto.svg",
+let headerLogoText = "",
+    headerLogoImgUrl = "assets/images/text-logo.png",
     headerLinks = [
     {
-        name: "Home",
-        url: "https://harutohiroki.com"
+        name: "About",
+        url: "https://github.com/camille-7/PublicGraphTool/blob/main/README.md"
     },
-    {
-        name: "Ranking",
-        url: "https://docs.google.com/spreadsheets/d/1DZTac1BxCLdmS2J4DDQyvKSVUZGnNhz2r86qMGcs_Jo/edit?pli=1#gid=330037169"
-    },
-    {
-        name: "Discord",
-        url: "https://discord.harutohiroki.com"
-    },
-    {
-        name: "Donate",
-        url: "https://www.paypal.me/harutohirokiUS"
-    },
+//    {
+//        name: "Ranking List",
+//        url: "https://docs.google.com/spreadsheets/d/1DZTac1BxCLdmS2J4DDQyvKSVUZGnNhz2r86qMGcs_Jo/edit?pli=1#gid=330037169"
+//    },
 //  {
 //      name: "GitHub",
 //      url: "https://github.com/HarutoHiroki"
 //  },
 ];
-
-// Source: https://www.teachmeaudio.com/mixing/techniques/audio-spectrum
-let tutorialDefinitions = [
-    {
-        name: 'Sub bass',
-        width: '16%',
-        description: 'The Rumble, usually out of human\'s hearing range and tend to be felt more than heard, providing a sense of power.'
-    },
-    {
-        name: 'Bass',
-        width: '20.6%',
-        description: 'Determins how "fat" or "thin" the sound is, boosting around 250hz tend to add a feeling of warmth. If you\'re a bass head you most likely like this range.'
-    },
-    {
-        name: 'Lower Mids',
-        width: '10.1%',
-        description: 'Low order harmonics of most instruments, generally viewed as the bass presence range. Boosting a signal around 300 Hz adds clarity to the bass and lower-stringed instruments. Too much boost around 500 Hz can make higher-frequency instruments sound muffled.'
-    },
-    {
-        name: 'Midrange',
-        width: "20%",
-        description: 'The midrange determines how prominent an instrument is in the mix. Boosting around 1000 Hz can give instruments a horn-like quality. Excess output at this range can sound tinny and may cause ear fatigue.'
-    },
-    {
-        name: 'Upper Mids',
-        width: "10%",
-        description: 'The high midrange is responsible for the attack on percussive and rhythm instruments. If boosted, this range can add presence. However, too much boost around the 3 kHz range can cause listening fatigue.'
-    },
-    {
-        name: 'Presence',
-        width: '5.9%',
-        description: 'The Presence range is responsible for the clarity and definition of a sound. Over-boosting can cause an irritating, harsh sound. Cutting in this range makes the sound more distant and transparent.'
-    },
-    {
-        name: 'Treble',
-        width: '17.4%',
-        description: 'The Treble range is composed entirely of harmonics and is responsible for sparkle and air of a sound. Over boosting in this region can accentuate hiss and cause ear fatigue.'
-    }
-]
 
 // o == offset
 // l ==

@@ -14,7 +14,7 @@ const init_phones = ["IEF Neutral Target"],                             // Optio
       site_url = '/',                               // URL of your graph "homepage"
       share_url = true,                             // If true, enables shareable URLs
       watermark_text = "HarutoHiroki",              // Optional. Watermark appears behind graphs
-      watermark_image_url = "assets/images/haruto.svg",   // Optional. If image file is in same directory as config, can be just the filename
+      watermark_image_url = "assets/images/copland.svg",   // Optional. If image file is in same directory as config, can be just the filename
       page_title = "HarutoHiroki",                  // Optional. Appended to the page title if share URLs are enabled
       page_description = "View and compare frequency response graphs for headphones.",
       accessories = true,                           // If true, displays specified HTML at the bottom of the page. Configure further below
@@ -90,7 +90,7 @@ function watermark(svg) {
         .attr("opacity",0.2)
         .append("text")
         .attrs({x:765, y:314, "font-size":10, "text-anchor":"end", "class":"site_name"})
-        .text("graphtool.harutohiroki.com");
+        .text("graphtool.layer7.me");
 }
 
 
@@ -222,7 +222,7 @@ setupGraphAnalytics();
 
 // If alt_header is enabled, these are the items added to the header
 let headerLogoText = "HarutoHiroki",
-    headerLogoImgUrl = "assets/images/haruto.svg",
+    headerLogoImgUrl = "assets/images/copland.svg",
     headerLinks = [
     {
         name: "Home",

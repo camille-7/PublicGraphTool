@@ -1,2 +1,213 @@
 [
+  {
+    "name": "64Audio",
+    "phones": [
+      {
+        "name": "U4s",
+        "file": ["64Audio U4s (M20 Module)", "64Audio U4s (M12 Module)", "64Audio U4s (MX Module)"],
+        "suffix": ["(M20 Module)","(M12 Module)","(MX Module)"]
+      },
+      {
+        "name": "U6t",
+        "file": ["64Audio U6t (M20 Module)","64Audio U6t (M12 Module)","64Audio U6t (MX Module)","64Audio U6t (No Module)"],
+        "suffix": ["(M20 Module)","(M12 Module)","(MX Module)","(No Module)"]
+      },
+      {
+        "name": "Volur",
+        "file": ["64Audio Volur (M20 Module)","64Audio Volur (M12 Module)","64Audio Volur (MX Module)","64Audio Volur (No Module)"],
+        "suffix": ["(M20 Module)","(M12 Module)","(MX Module)","(No Module)"]
+      },
+      {
+        "name": "Fourte Blanc",
+        "file": "64Audio Fourte Blanc"
+      }
+    ]
+  },
+  {
+    "name": "7Hz",
+    "phones": [
+      {
+        "name": "Zero",
+        "file": "Salnotes Zero"
+      },
+      {
+        "name": "Zero 2",
+        "file": "7Hz x Crinacle Zero 2"
+      }
+    ]
+  },
+  {
+    "name": "Apple",
+    "phones": [
+      {
+        "name": "AirPods Pro 2",
+        "file": "Apple AirPods Pro 2"
+      }
+    ]
+  },
+  {
+    "name": "Astell&Kern",
+    "phones": [
+      {
+        "name": "Odyssey",
+        "file": "Astell&Kern Odyssey"
+      },
+      {
+        "name": "Pathfinder",
+        "file": "Astell&Kern Pathfinder"
+      },
+      {
+        "name": "Aura",
+        "file": "Astell&Kern Aura"
+      }
+    ]
+  },
+  {
+    "name": "AUR Audio",
+    "phones": [
+      {
+        "name": "Aurora",
+        "file": "AUR Audio Aurora"
+      }
+    ]
+  },
+  {
+    "name": "Delta Airlines",
+    "phones": [
+      {
+        "name": "Complimentary Earphones",
+        "file": "Delta Airlines Complimentary Earphones"
+      }
+    ]
+  },
+  {
+    "name": "Hiby Digital",
+    "phones": [
+      {
+        "name": "XOE",
+        "file": "Hiby Digital XOE"
+      }
+    ]
+  },
+  {
+    "name": "Kinera",
+    "phones": [
+      {
+        "name": "Urd",
+        "file": "Kinera Urd"
+      }
+    ]
+  },
+  {
+    "name": "KZ",
+    "phones": [
+      {
+        "name": "CRN",
+        "file": "KZ x Crinacle CRN"
+      }
+    ]
+  },
+  {
+    "name": "Letshuoer",
+    "phones": [
+      {
+        "name": "Cadenza 12",
+        "file": "Letshuoer Cadenza 12"
+      },
+      {
+        "name": "EJ07M",
+        "file": "Letshuoer EJ07M"
+      }
+    ]
+  },
+  {
+    "name": "Moondrop",
+    "phones": [
+      {
+        "name": "Variations",
+        "file": "Moondrop Variations"
+      },
+      {
+        "name": "Aria Snow",
+        "file": "Moondrop Aria Snow"
+      }
+    ]
+  },
+  {
+    "name": "Noble Audio",
+    "phones": [
+      {
+        "name": "Ronin",
+        "file": "Noble Audio Ronin"
+      },
+      {
+        "name": "Katana",
+        "file": "Noble Audio Katana"
+      },
+      {
+        "name": "Stage 3",
+        "file": "Noble Audio Stage 3"
+      },
+      {
+        "name": "Zephyr",
+        "file": "Noble Audio Zephyr"
+      }
+    ]
+  },
+  {
+    "name": "Subtonic Audio",
+    "phones": [
+      {
+        "name": "Storm",
+        "file": "Subtonic Audio Storm"
+      }
+    ]
+  },
+  {
+    "name": "ThieAudio",
+    "phones": [
+      {
+        "name": "Monarch MK II",
+        "file": "ThieAudio Monarch MK II"
+      },
+      {
+        "name": "Monarch MK III",
+        "file": "ThieAudio Monarch MK III"
+      },
+      {
+        "name": "V16 Divinity",
+        "file": "ThieAudio V16 Divinity"
+      }
+    ]
+  },
+  {
+    "name": "Ultimate Ears",
+    "phones": [
+      {
+        "name": "Live",
+        "file": "Ultimate Ears Live"
+      },
+      {
+        "name": "UE6",
+        "file": "Ultimate Ears UE6"
+      },
+      {
+        "name": "UE7",
+        "file": "Ultimate Ears UE7"
+      },
+      {
+        "name": "UE18+ Pro",
+        "file": "Ultimate Ears UE18+ Pro"
+      }
+    ]
+  },
+  {
+    "name": "Unique Melody",
+    "phones": [
+      {
+        "name": "MEST MK III",
+        "file": "Unique Melody MEST MK III"
+      }
+    ]
+  }
 ]

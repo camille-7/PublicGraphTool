@@ -1,10 +1,38 @@
 
 /* Primary color theme */
+/* pinkish = hsla(352, 58%, 64%, 1) */
+/* background =   */
+
 :root {
-    --accent-color: hsl(0, 0%, 0%);
+    --accent-color: hsla(352, 58%, 64%, 1);
+    --accent-color-contrast: hsla(0, 0%, 80%, 0.733);
+
+    --background-color: rgb(29, 29, 29);
+    --background-color-contrast: rgb(185, 185, 185);
+    --background-color-contrast-more: hsl(0, 0%, 29%);
+    --background-color-graph: hsl(0, 0%, 8%);
+
+    --background-color-inputs: hsl(0, 0%, 15%);
+
+    --font-color-primary: hsl(30, 13%, 85%);
+    --font-color-secondary: hsl(30, 13%, 85%);
+    --font-color-inputs: hsl(30, 13%, 85%);
+
+    --font-primary: 'Open Sans', sans-serif;
+    --font-secondary: monospace;
+
+    --scrollbar-color: 0,0,0;
+    --scrollbar-accent: 255,255,255;
+
+    --logo-filter: invert(0.0);
+    --svg-filter: invert(0.0);
+}
+
+body.dark-mode {
+    --accent-color: hsla(352, 58%, 64%, 1);
     --accent-color-contrast: hsl(0, 0%, 55%);
 
-    --background-color: hsl(0, 0%, 96%);
+    --background-color: hsl(0, 0%, 83%);
     --background-color-contrast: hsl(0, 0%, 90%);
     --background-color-contrast-more: hsl(0, 0%, 65%);
     --background-color-graph: hsl(0, 0%, 100%);
@@ -21,31 +49,16 @@
     --scrollbar-color: 255,255,255;
     --scrollbar-accent: 0,0,0;
         
-    --logo-filter: invert(1.0);
+    --logo-filter: invert(0.0);
     --svg-filter: none;
 }
 
-body.dark-mode {
-    --accent-color: hsl(0, 0%, 100%);
-    --accent-color-contrast: hsl(0, 0%, 50%);
-
-    --background-color: hsl(0, 0%, 6%);
-    --background-color-contrast: hsl(0, 0%, 15%);
-    --background-color-contrast-more: hsl(0, 0%, 30%);
-    --background-color-graph: hsl(0, 0%, 8%);
-
-    --background-color-inputs: hsl(0, 0%, 15%);
-
-    --font-color-primary: hsl(0, 0%, 80%);
-    --font-color-secondary: hsl(0, 0%, 0%);
-    --font-color-inputs: hsl(0, 0%, 60%);
-
-    --font-primary: 'Open Sans', sans-serif;
-    --font-secondary: monospace;
-
-    --scrollbar-color: 0,0,0;
-    --scrollbar-accent: 255,255,255;
-
-    --logo-filter: invert(1.0);
-    --svg-filter: invert(1.0);
+text.site_name {
+    color: var(--font-color-primary);
+    color: magenta;
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 14px;
+    
+    filter: var(--svg-filter);
 }
