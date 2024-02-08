@@ -169,10 +169,10 @@ let headerLogoText = "",
         name: "About",
         url: "https://github.com/camille-7/PublicGraphTool/blob/main/README.md"
     },
-//    {
-//        name: "Ranking List",
-//        url: "https://docs.google.com/spreadsheets/d/1DZTac1BxCLdmS2J4DDQyvKSVUZGnNhz2r86qMGcs_Jo/edit?pli=1#gid=330037169"
-//    },
+    {
+        name: "Reccomendations",
+        url: "https://github.com/camille-7/txt-files/blob/main/product-reccomendations.md"
+    }
 //  {
 //      name: "GitHub",
 //      url: "https://github.com/HarutoHiroki"
