@@ -41,7 +41,8 @@
     "phones": [
       {
         "name": "AirPods Pro 2",
-        "file": "Apple AirPods Pro 2"
+        "file": ["Apple AirPods Pro 2"],
+        "suffix": ["(ANC On)"]
       }
     ]
   },
@@ -76,7 +77,8 @@
     "phones": [
       {
         "name": "Aurvana Ace 2",
-        "file": "Creative Aurvana Ace2"
+        "file": ["Creative Aurvana Ace2"],
+        "suffix": ["(ANC On)"]
       }
     ]
   },
