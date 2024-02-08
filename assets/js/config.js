@@ -36,8 +36,8 @@ const init_phones = ["JM-1 Target"],// Optional. Which graphs to display on init
 
 // Specify which targets to display
 const targets = [
-    { type:"Reference", files:["∆", "JM-1"] },
-    { type:"Community",    files:["In-Ear Fidelity (Compensated)"] },
+    { type:"Reference", files:["∆", "JM-1", "Diffuse Field"] },
+    { type:"Community",    files:["IEF Compensation", "IEF 2023 Adjusted"] },
     { type:"Preference", files:["Harman In-Ear (2019)","Harman In-Ear (2017)"] }
 ];
 
@@ -50,7 +50,7 @@ const  preference_bounds = "assets/images/bounds.png", // Preference bounds imag
        default_tilt = -1,                            // Default Custom DF tilt value
        default_ear = 0,                                // Default Custom DF ear gain value
        default_treble = 0,                             // Default Custom DF treble gain value
-       tiltableTargets = ["∆","JM-1"];  
+       tiltableTargets = ["∆","JM-1","Diffuse Field"];  
 
 
 // *************************************************************
