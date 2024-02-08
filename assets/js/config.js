@@ -179,6 +179,44 @@ let headerLogoText = "",
 //  },
 ];
 
+let tutorialDefinitions = [
+    {
+        name: 'Sub bass',
+        width: '16%',
+        description: 'The Rumble™: Not much melodic or tonal content here, save for the fundamentals of the lowest notes on a piano, synth, or bass guitar. Kick drums and floor toms often also have fundamental energy here. Too much makes the sound unrealistically "big," while too little results in lacking weight or sense of tactility.'
+    },
+    {
+        name: 'Bass',
+        width: '20.6%',
+        description: 'Fundamental frequencies of many sounds. Drums, pianos, guitars, vocals, strings, horns, and woodwinds. Reduced energy here can make the sound lean and cold, but also add clarity. Too much here can make the sound overly resonant, boomy, lumpy, swollen, or muddy... but it can also make the sound warm, inviting, or rich.'
+    },
+    {
+        name: 'Lower Mids',
+        width: '10.1%',
+        description: 'Low order harmonics of most instruments. Boosting this region brings forth for the boxy overtones of bass, while perhaps giving more body to instruments like flute or violin. Cutting in this region can bring clarity to kick drums, as well as help guitars sound less claustrophobic.'
+    },
+    {
+        name: 'Midrange',
+        width: "10%",
+        description: 'The midrange can determine how prominent an instrument is in the overall mix, in fact boosts in this area can be conflated with things overall being "louder". Boosting around 800 Hz can give instruments a horn-like quality, as horns naturally tend to have the bulk of their energy around here. Excess output at this range can sound honky and may cause ear fatigue.'
+    },
+    {
+        name: 'Upper Mids',
+        width: "20%",
+        description: 'Likely the most critical band of audio. The upper midrange is responsible for the percussive attack, intelligibility, texture, forwardness, and character of almost every instrument and voice. If boosted, this range can add any of these things, but pushing it too far can lead to things being overly-textured or harsh. Too little energy here makes the sound blunted or unintelligible.'
+    },
+    {
+        name: 'Presence',
+        width: '5.9%',
+        description: 'The presence range serves as the transition region between upper midrange and treble, and as such it shares aspects typical to either of them. It contains both intelligibility and clarity cues, as well as textural harmonics. Over-boosting can cause a scratchy, grainy sound. Cutting in this range can reduce those aspects, at the cost of making things less textured and more distant.'
+    },
+    {
+        name: 'Treble',
+        width: '17.4%',
+        description: 'The danger zone. This is where we find the stringy, splashy bits of sound. The detail of a plucked acoustic guitar, the shimmer of a hardly-struck piano, the—at times sibilant, whispery—air of voices, the sheen of strings and the breath of woodwinds and horns. Too much can make things sound thin and weightless, while too little can make things sound blurred or smeared.'
+    }
+]
+
 // o == offset
 // l ==
 // p == phone
