@@ -92,6 +92,15 @@
     ]
   },
   {
+    "name": "FiiO",
+    "phones": [
+      {
+        "name": "FH-9",
+        "file": "FiiO FH-9"
+      }
+    ]
+  },
+  {
     "name": "Hiby Digital",
     "phones": [
       {
@@ -162,6 +171,10 @@
       {
         "name": "Zephyr",
         "file": "Noble Audio Zephyr"
+      },
+      {
+        "name": "XM-1",
+        "file": "Noble Audio XM-1"
       }
     ]
   },
