@@ -73,6 +73,15 @@
     ]
   },
   {
+    "name": "Campfire Audio",
+    "phones": [
+      {
+        "name": "Trifecta (Spectral Collection",
+        "file": ["Campfire Audio Trifecta"]
+      }
+    ]
+  },
+  {
     "name": "Creative",
     "phones": [
       {
@@ -97,6 +106,19 @@
       {
         "name": "FH-9",
         "file": "FiiO FH-9"
+      }
+    ]
+  },
+  {
+    "name": "FiR Audio",
+    "phones": [
+      {
+        "name": "Radon 6",
+        "file": "FiR Audio Radon 6"
+      },
+      {
+        "name": "Xenon 6",
+        "file": "FiR Audio Xenon 6"
       }
     ]
   },
@@ -163,6 +185,10 @@
       {
         "name": "Katana",
         "file": "Noble Audio Katana"
+      },
+      {
+        "name": "Spartacus",
+        "file": "Noble Audio Spartacus"
       },
       {
         "name": "Stage 3",
