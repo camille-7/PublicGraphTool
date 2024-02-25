@@ -154,6 +154,15 @@
     ]
   },
   {
+    "name": "Nightjar Acoustics",
+    "phones": [
+      {
+        "name": "Singularity",
+        "file": "Nightjar Singularity"
+      }
+    ]
+  },
+  {
     "name": "Noble Audio",
     "phones": [
       {
@@ -179,11 +188,33 @@
     ]
   },
   {
+    "name": "Simgot",
+    "phones": [
+      {
+        "name": "EM6L",
+        "file": "Simgot EM6L"
+      }
+    ]
+  },
+  {
     "name": "Subtonic Audio",
     "phones": [
       {
         "name": "Storm",
         "file": "Subtonic Audio Storm"
+      }
+    ]
+  },
+  {
+    "name": "Symphonium",
+    "phones": [
+      {
+        "name": "Helios SE",
+        "file": "Symphonium Helios SE"
+      },
+      {
+        "name": "Meteor",
+        "file": "Symphonium Meteor"
       }
     ]
   },
