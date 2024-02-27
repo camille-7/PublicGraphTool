@@ -44,7 +44,7 @@ const targets = [
 // Haruto's Addons
 const  preference_bounds = "assets/images/bounds.png", // Preference bounds image
        PHONE_BOOK = "phone_book.json",                 // Path to phone book JSON file
-       default_DF_name = "JM-1",                       // Default RAW DF name
+       default_DF_name = "∆",                       // Default RAW DF name
        dfBaseline = true,                              // If true, DF is used as baseline when custom df tilt is on
        default_bass_shelf = 0,                         // Default Custom DF bass shelf value
        default_tilt = -1,                            // Default Custom DF tilt value
