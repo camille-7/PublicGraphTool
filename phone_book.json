@@ -64,6 +64,16 @@
     ]
   },
   {
+    "name": "Audiosense",
+    "phones": [
+      {
+        "name": "DT200",
+        "file": ["Audiosense DT200 (Divinus Velvet)", "Audiosense DT200 (SpinFit CP120)", "Audiosense DT200 (Final E)"],
+        "suffix": ["(Divinus Velvet)","(SpinFit CP120)","(Final E)"]
+      }
+    ]
+  },
+  {
     "name": "AUR Audio",
     "phones": [
       {
