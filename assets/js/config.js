@@ -172,11 +172,11 @@ let headerLogoText = "",
     {
         name: "Reccomendations",
         url: "https://github.com/camille-7/txt-files/blob/main/product-reccomendations.md"
-    }
-//  {
-//      name: "GitHub",
-//      url: "https://github.com/HarutoHiroki"
-//  },
+    },
+    {
+      name: "IEM Measurement Guide",
+      url: "https://github.com/camille-7/Documents/blob/main/Audio/IEM-Measurement-Guide.md"
+    },
 ];
 
 let tutorialDefinitions = [
