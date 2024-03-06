@@ -142,6 +142,15 @@
     ]
   },
   {
+    "name": "ISN Audio",
+    "phones": [
+      {
+        "name": "Neo 5",
+        "file": "ISN Audio Neo5"
+      }
+    ]
+  },
+  {
     "name": "Kinera",
     "phones": [
       {
