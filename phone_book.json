@@ -185,12 +185,16 @@
     "name": "Moondrop",
     "phones": [
       {
-        "name": "Variations",
-        "file": "Moondrop Variations"
-      },
-      {
         "name": "Aria Snow",
         "file": "Moondrop Aria Snow"
+      },
+      {
+        "name": "Chu",
+        "file": "Moondrop Chu"
+      },
+      {
+        "name": "Variations",
+        "file": "Moondrop Variations"
       }
     ]
   },
