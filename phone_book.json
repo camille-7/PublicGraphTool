@@ -281,6 +281,19 @@
     ]
   },
   {
+    "name": "Truthear",
+    "phones": [
+      {
+        "name": "Hexa",
+        "file": "Truthear Hexa"
+      },
+      {
+        "name": "Nova",
+        "file": "Truthear Nova"
+      }
+    ]
+  },
+  {
     "name": "Ultimate Ears",
     "phones": [
       {
