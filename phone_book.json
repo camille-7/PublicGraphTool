@@ -285,6 +285,24 @@
     ]
   },
   {
+    "name": "Tangzu",
+    "phones": [
+      {
+        "name": "Wan'er",
+        "file": "Tangzu Wan'er"
+      }
+    ]
+  },
+  {
+    "name": "Tangzu x HBB",
+    "phones": [
+      {
+        "name": "Wu Heydey",
+        "file": "Tangzu x HBB Wu Heydey"
+      }
+    ]
+  },
+  {
     "name": "Truthear",
     "phones": [
       {
