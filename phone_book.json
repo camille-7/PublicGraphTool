@@ -191,6 +191,15 @@
     ]
   },
   {
+    "name": "MiM Audio",
+    "phones": [
+      {
+        "name": "Dark Magician",
+        "file": "MiM Audio Dark Magician"
+      }
+    ]
+  },
+  {
     "name": "Moondrop",
     "phones": [
       {
