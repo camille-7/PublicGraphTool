@@ -342,6 +342,10 @@
     "name": "Truthear",
     "phones": [
       {
+        "name": "Gate",
+        "file": "Truthear Gate"
+      },
+      {
         "name": "Hexa",
         "file": "Truthear Hexa"
       },
