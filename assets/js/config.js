@@ -36,7 +36,7 @@ const init_phones = ["JM-1 Target"],// Optional. Which graphs to display on init
 
 // Specify which targets to display
 const targets = [
-    { type:"Reference", files:["∆", "JM-1", "Diffuse Field"] },
+    { type:"Reference", files:["ISO 11904-1 DF (711 Z)" "∆", "JM-1", "Diffuse Field"] },
     { type:"Community",    files:["IEF Compensation", "IEF 2023 Adjusted"] },
     { type:"Preference", files:["Harman In-Ear (2019)","Harman In-Ear (2017)"] }
 ];
