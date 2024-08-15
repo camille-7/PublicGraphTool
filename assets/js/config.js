@@ -1,5 +1,5 @@
 // Configuration options
-const init_phones = ["ISO 11904-1 DF (711 Z) Target"],// Optional. Which graphs to display on initial load. Note: Share URLs will override this set
+const init_phones = ["JM-1 Target"],// Optional. Which graphs to display on initial load. Note: Share URLs will override this set
       DIR = "data/",                                // Directory where graph files are stored
       default_channels = ["L","R"],                 // Which channels to display. Avoid javascript errors if loading just one channel per phone
       default_normalization = "dB",                 // Sets default graph normalization mode. Accepts "dB" or "Hz"
@@ -36,7 +36,7 @@ const init_phones = ["ISO 11904-1 DF (711 Z) Target"],// Optional. Which graphs 
 
 // Specify which targets to display
 const targets = [
-    { type:"Reference", files:["ISO 11904-1 DF (711 Z)" "∆", "JM-1", "Diffuse Field"] },
+    { type:"Reference", files:["ISO 11904-1 DF (711 Z)", "∆", "JM-1", "Diffuse Field"] },
     { type:"Community",    files:["IEF Compensation", "IEF 2023 Adjusted"] },
     { type:"Preference", files:["Harman In-Ear (2019)","Harman In-Ear (2017)"] }
 ];
